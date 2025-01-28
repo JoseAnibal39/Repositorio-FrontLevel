@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repositorio Online</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- CodeMirror CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+  <style>
+    /* Estilos gerais */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0d1117;
+      color: #c9d1d9;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #161b22;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li {
+      margin: 0 10px;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #58a6ff;
+      transition: color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      color: #1f6feb;
+    }
+
+    /* Menu lateral */
+    .menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #161b22;
+      color: #c9d1d9;
+      padding: 20px;
+      border-radius: 5px;
+      display: none;
+      z-index: 1000;
+    }
+
+    .menu ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .menu ul li {
+      margin: 10px 0;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+      color: #58a6ff;
+      transition: color 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      color: #1f6feb;
+    }
+
+    /* Área principal */
+    .intro {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .language-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .language-tabs button {
+      padding: 10px 15px;
+      font-size: 1rem;
+      color: #ffffff;
+      background-color: #238636;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .language-tabs button:hover {
+      background-color: #2ea043;
+      transform: scale(1.1);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      background-color: #161b22;
+      color: #8b949e;
+      margin-top: 50px;
+    }
+
+    /* Animação do menu */
+    .menu.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Barra de Menu -->
+  <header class="navbar">
+    <div class="logo">Repositorio Online</div>
+    <nav>
+      <ul>
+        <li><a href="#java">Java</a></li>
+        <li><a href="#python">Python</a></li>
+        <li><a href="#c++">C++</a></li>
+        <li><a href="#c#">C#</a></li>
+        <li><a href="#html">HTML</a></li>
+        <li><a href="#css">CSS</a></li>
+        <li><a href="#javascript">JavaScript</a></li>
+        <li><a href="#php">PHP</a></li>
+      </ul>
+    </nav>
+    <span class="menu-toggle">☰ Menu</span>
+  </header>
+
+  <!-- Menu Lateral -->
+  <div class="menu" id="menu">
+    <ul>
+      <li><a href="#java">Java</a></li>
+      <li><a href="#python">Python</a></li>
+      <li><a href="#c++">C++</a></li>
+      <li><a href="#c#">C#</a></li>
+      <li><a href="#html">HTML</a></li>
+      <li><a href="#css">CSS</a></li>
+      <li><a href="#javascript">JavaScript</a></li>
+      <li><a href="#php">PHP</a></li>
+    </ul>
+  </div>
+
+  <!-- Seção principal -->
+  <main>
+    <div class="intro">
+      <h1>Bem-vindo ao Repositorio Online</h1>
+      <p>Gerencie, leia e edite seus projetos com suporte a várias linguagens!</p>
+    </div>
+
+    <!-- Área de Linguagens -->
+    <section id="languages">
+      <h2>Selecione uma linguagem</h2>
+      <div class="language-tabs">
+        <button data-lang="java">Java</button>
+        <button data-lang="python">Python</button>
+        <button data-lang="c++">C++</button>
+        <button data-lang="c#">C#</button>
+        <button data-lang="html">HTML</button>
+        <button data-lang="css">CSS</button>
+        <button data-lang="javascript">JavaScript</button>
+        <button data-lang="php">PHP</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Repositorio Online. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // Menu lateral
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.getElementById('menu');
+
+    menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
+
+    // Abas de linguagens e carregamento de arquivos
+    document.querySelectorAll('.language-tabs button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const lang = button.getAttribute('data-lang');
+        openLanguageTab(lang);
+      });
+    });
+
+    // Abre uma aba para a linguagem selecionada
+    function openLanguageTab(language) {
+      const newTab = window.open('', '_blank');
+      newTab.document.write(`
+        <html>
+        <head>
+          <title>${language} - Repositorio Online</title>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+        </head>
+        <body style="background-color: #0d1117; color: #c9d1d9; font-family: Arial;">
+          <h1 style="text-align: center;">Arquivos - ${language}</h1>
+          <div id="file-list" style="margin: 20px; text-align: center;">
+            <p>Clique em "Adicionar Projeto" para carregar arquivos nesta aba.</p>
+            <button onclick="document.getElementById('fileInput').click()" style="padding: 10px 20px; background-color: #238636; color: white; border: none; border-radius: 5px; cursor: pointer;">Adicionar Projeto</button>
+            <input type="file" id="fileInput" multiple style="display: none;" onchange="handleFiles(event)">
+          </div>
+          <script>
+            function handleFiles(event) {
+              const files = event.target.files;
+              const fileList = document.getElementById('file-list');
+              fileList.innerHTML = '<h2>Arquivos carregados:</h2>';
+              Array.from(files).forEach((file) => {
+                const reader = new FileReader();
+                reader.onload = function () {
+                  const codeContainer = document.createElement('div');
+                  codeContainer.innerHTML = '<h3>' + file.name + '</h3><textarea>' + reader.result + '</textarea>';
+                  fileList.appendChild(codeContainer);
+                  CodeMirror.fromTextArea(codeContainer.querySelector('textarea'), {
+                    lineNumbers: true,
+                    mode: language.toLowerCase(),
+                    theme: 'default',
+                  });
+                };
+                reader.readAsText(file);
+              });
+            }
+          </script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+        </body>
+        </html>
+      `);
+    }
+  </script>
+</body>
+</html>
